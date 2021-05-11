@@ -1,5 +1,5 @@
-# openhours
-Spring Reactive API with a functional endpoint to produce a formatted store opening hours
+# OpenHours Reactive API
+Spring Reactive API with a functional endpoint which produces formatted store opening hours based on JSON requests
 
 ## What do you need
 - JDK11 or later
