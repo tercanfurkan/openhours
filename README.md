@@ -66,5 +66,6 @@ Example JSON data:
 ]
 ```
 
-***Some special cases to consider when storing the time***
+***Some special cases to consider when storing the time:***
+
 The above example would be the simplest solution for the simplest use-case. If the use-case needs to consider timezones and daylight savings, the time shall be stored in a unified standard like UTC together with an additional timezone field. In this case just storing the "minutes past midnight" would not be enough to handle the daylight saving changes.
