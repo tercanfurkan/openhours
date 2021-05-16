@@ -10,6 +10,11 @@ fun OpeningHoursMap.toFormattedString(): String {
         .toSortedSet(compareBy(DayEventPair::day, DayEventPair::event))
         .partition { (_, event) -> event.type == "open" }
 
+    if (openings.size != closings.size) {
+        if (openings.size > closings.size) throw NoSuchElementException("Close event missing")
+        else throw NoSuchElementException("Open event missing")
+    }
+
     val openHours = openings.map { (openingDay, openingEvent) -> // get all (open,close) pairs for each day
         val closingEvent = closings.getClosingEventFor(openingDay, openingEvent)
         OpenHour(openingDay, openingEvent.value, closingEvent.value)
@@ -64,6 +69,6 @@ data class OpenHour(val day: Day, val opening: Long, val closing: Long) {
 data class DayEventPair(val day: Day, val event: Event)
 
 fun getFormattedDayString(day: Day, openHours: List<OpenHour>?): String {
-    val openHourFormattedString = openHours?.joinToString(" ") { it.toFormattedString() } ?: "Closed"
+    val openHourFormattedString = openHours?.joinToString(", ") { it.toFormattedString() } ?: "Closed"
     return "${day.name.toLowerCase().capitalize()}: $openHourFormattedString"
 }
