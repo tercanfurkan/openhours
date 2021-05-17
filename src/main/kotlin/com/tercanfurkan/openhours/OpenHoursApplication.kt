@@ -46,8 +46,9 @@ data class OpeningHourX(val day: Day, val events: List<Event>) : HashMap<Day, Li
 
 @Component
 class PostHandler() {
-	suspend fun handle(@Valid @RequestBody req: ServerRequest): ServerResponse {
+	suspend fun handle(req: ServerRequest): ServerResponse {
 		val body = req.awaitBody<OpeningHoursMap>()
+		//TODO: implement input validation
 		return ServerResponse.ok()
 			.contentType(MediaType.TEXT_PLAIN)
 			.bodyValueAndAwait(body.toFormattedString())
